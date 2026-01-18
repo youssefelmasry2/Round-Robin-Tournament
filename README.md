@@ -58,6 +58,10 @@ Once the application is running, you can access the Swagger API documentation at
 
 http://localhost:3000/api
 
+## Database
+
+The application uses SQLite for data persistence. The database file (tournament.db) is automatically created in the project root when the application starts.
+
 ## API Endpoints
 
 ### Players
@@ -119,7 +123,7 @@ curl -X POST http://localhost:3000/tournaments/{tournament_id}/participants -H "
 ### 4. Generate Tournament Schedule (Creates All Games)
 
 ```bash
-curl -X POST http://localhost:3000/tournaments/{tournament_id}/schedule
+curl -X POST http://localhost:3000/tournaments/{tournament_id}/start
 ```
 
 This creates all the round-robin game matchups. After this, you can record results for each game.
@@ -237,9 +241,7 @@ curl http://localhost:3000/tournaments/{tournament_id}/schedule
 5. A player cannot play against themselves
 6. Player names must be unique
 
-## Database
 
-The application uses SQLite for data persistence. The database file (tournament.db) is automatically created in the project root when the application starts.
 
 ## Project Structure
 
