@@ -1,98 +1,283 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Round-Robin Tournament Service
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A RESTful API service for managing round-robin sports tournaments built with NestJS and SQLite.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Overview
 
-## Description
+In a round-robin tournament, each participant must play against every other participant exactly once. This service allows you to:
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- Create and manage players
+- Create tournaments with up to 5 participants
+- Add/remove players from tournaments
+- Record game results
+- View tournament status and leaderboard
 
-## Project setup
+## Scoring System
 
-```bash
-$ npm install
-```
+- **Win**: 2 points
+- **Draw**: 1 point
+- **Loss**: 0 points
 
-## Compile and run the project
+## Tournament Status
+
+- **Planning**: No games have been played yet
+- **Started**: At least one game has been played, but the tournament is not complete
+- **Finished**: All possible games have been played (everyone has played against everyone)
+
+## Prerequisites
+
+- Node.js (v14.x or later)
+- npm (v6.x or later)
+
+## Installation
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm install
 ```
 
-## Run tests
+## Running the Application
+
+### Development mode (with hot reload)
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm run start:dev
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### Production mode
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+npm run build
+npm run start:prod
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+The application will be accessible at http://localhost:3000
 
-## Resources
+## API Documentation
 
-Check out a few resources that may come in handy when working with NestJS:
+Once the application is running, you can access the Swagger API documentation at:
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+http://localhost:3000/api
 
-## Support
+## API Endpoints
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### Players
 
-## Stay in touch
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | /players | Create a new player |
+| GET | /players | Get all players |
+| GET | /players/:id | Get a player by ID |
+| DELETE | /players/:id | Delete a player |
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### Tournaments
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | /tournaments | Create a new tournament |
+| GET | /tournaments | Get all tournaments |
+| GET | /tournaments/:id | Get a tournament by ID |
+| DELETE | /tournaments/:id | Delete a tournament |
+| POST | /tournaments/:id/participants | Add a participant to a tournament |
+| DELETE | /tournaments/:id/participants/:playerId | Remove a participant |
+| GET | /tournaments/:id/participants | Get all participants of a tournament |
+| GET | /tournaments/:id/status | Get tournament status and leaderboard |
+| POST | /tournaments/:id/start | **Generate round-robin schedule (creates all games)** |
+| GET | /tournaments/:id/schedule | Get round-robin schedule with all matchups |
+
+### Games
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | /games | Get all games (optional: filter by tournament_id) |
+| GET | /games/:id | Get a game by ID |
+| PUT | /games/:id/result | **Record the result of a game** |
+| PUT | /games/:id/reset | Reset a game back to pending status |
+| DELETE | /games/:id | Delete a game |
+
+## Usage Examples
+
+### 1. Create Players
+
+```bash
+curl -X POST http://localhost:3000/players -H "Content-Type: application/json" -d '{"name": "Alice"}'
+curl -X POST http://localhost:3000/players -H "Content-Type: application/json" -d '{"name": "Bob"}'
+curl -X POST http://localhost:3000/players -H "Content-Type: application/json" -d '{"name": "Charlie"}'
+```
+
+### 2. Create a Tournament
+
+```bash
+curl -X POST http://localhost:3000/tournaments -H "Content-Type: application/json" -d '{"name": "Summer Championship 2024", "max_participants": 5}'
+```
+
+### 3. Add Participants to Tournament
+
+```bash
+curl -X POST http://localhost:3000/tournaments/{tournament_id}/participants -H "Content-Type: application/json" -d '{"player_id": "{player_id}"}'
+```
+
+### 4. Generate Tournament Schedule (Creates All Games)
+
+```bash
+curl -X POST http://localhost:3000/tournaments/{tournament_id}/schedule
+```
+
+This creates all the round-robin game matchups. After this, you can record results for each game.
+
+### 5. Record Game Results
+
+Use `result` to specify the outcome: `"player1"` (player 1 wins), `"player2"` (player 2 wins), or `"draw"`.
+
+```bash
+# Player 1 wins
+curl -X PUT http://localhost:3000/games/{game_id}/result -H "Content-Type: application/json" -d '{"result": "player1"}'
+
+# Player 2 wins
+curl -X PUT http://localhost:3000/games/{game_id}/result -H "Content-Type: application/json" -d '{"result": "player2"}'
+
+# Draw
+curl -X PUT http://localhost:3000/games/{game_id}/result -H "Content-Type: application/json" -d '{"result": "draw"}'
+```
+
+### 6. Get Tournament Status and Leaderboard
+
+```bash
+curl http://localhost:3000/tournaments/{tournament_id}/status
+```
+
+Example Response:
+
+```json
+{
+  "tournament": {
+    "id": "abc123",
+    "name": "Summer Championship 2024",
+    "max_participants": 5,
+    "created_at": "2024-01-15T10:00:00.000Z"
+  },
+  "status": "started",
+  "participants_count": 3,
+  "total_games": 3,
+  "played_games": 1,
+  "remaining_games": 2,
+  "leaderboard": [
+    {
+      "player_id": "player1",
+      "player_name": "Alice",
+      "points": 2,
+      "wins": 1,
+      "draws": 0,
+      "losses": 0,
+      "games_played": 1
+    }
+  ]
+}
+```
+
+### 7. Get Round-Robin Schedule
+
+```bash
+curl http://localhost:3000/tournaments/{tournament_id}/schedule
+```
+
+**Example Response:**
+
+```json
+{
+  "tournament": {
+    "id": "abc123",
+    "name": "Summer Championship 2024"
+  },
+  "total_matches": 3,
+  "completed_matches": 1,
+  "pending_matches": 2,
+  "schedule": [
+    {
+      "game_id": "game-uuid-1",
+      "match_number": 1,
+      "player1_id": "p1",
+      "player1_name": "Alice",
+      "player2_id": "p2",
+      "player2_name": "Bob",
+      "status": "completed",
+      "result": {
+        "player1_score": 3,
+        "player2_score": 1,
+        "winner": "Alice"
+      }
+    },
+    {
+      "game_id": "game-uuid-2",
+      "match_number": 2,
+      "player1_id": "p1",
+      "player1_name": "Alice",
+      "player2_id": "p3",
+      "player2_name": "Charlie",
+      "status": "pending"
+    },
+    {
+      "game_id": "game-uuid-3",
+      "match_number": 3,
+      "player1_id": "p2",
+      "player1_name": "Bob",
+      "player2_id": "p3",
+      "player2_name": "Charlie",
+      "status": "pending"
+    }
+  ]
+}
+```
+
+## Business Rules
+
+1. Maximum 5 participants per tournament
+2. Players must be registered in a tournament before they can play games
+3. Each pair of players can only play once per tournament
+4. Cannot add/remove participants after a tournament has started (games played)
+5. A player cannot play against themselves
+6. Player names must be unique
+
+## Database
+
+The application uses SQLite for data persistence. The database file (tournament.db) is automatically created in the project root when the application starts.
+
+## Project Structure
+
+```
+src/
+  database/
+    database.module.ts
+    db.service.ts
+  players/
+    dto/
+    player.entity.ts
+    players.controller.ts
+    players.module.ts
+    players.service.ts
+  tournaments/
+    dto/
+    tournament.entity.ts
+    tournaments.controller.ts
+    tournaments.module.ts
+    tournaments.service.ts
+  games/
+    dto/
+    game.entity.ts
+    games.controller.ts
+    games.module.ts
+    games.service.ts
+  app.module.ts
+  main.ts
+```
+
+## Testing
+
+```bash
+npm run test
+npm run test:e2e
+npm run test:cov
+```
 
 ## License
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+UNLICENSED
